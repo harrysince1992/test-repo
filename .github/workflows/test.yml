@@ -12,4 +12,21 @@ jobs:
       run: |
         sudo apt install awscli -y
         aws --version
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v2
+      with:
+        aws-access-key-id: ${{ secrets.TEST_AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.TEST_AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-east-2
+    - name: Update codecommit repo
+      run: |
+        echo "new content updation" >> manifest.json
+        aws codecommit put-file \
+        --repository-name test-repo \
+        --branch-name main \
+        --file-content file://manifest.json \
+        --file-path ./manifest.json \
+        --name "Harpreet Singh" \
+        --email "harrylubana14@gmail.com" \
+        --commit-message "updated content" 
     
