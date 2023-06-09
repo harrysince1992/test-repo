@@ -17,7 +17,7 @@ jobs:
       with:
         aws-access-key-id: ${{ secrets.TEST_AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.TEST_AWS_SECRET_ACCESS_KEY }}
-        aws-region: us-east-2
+        aws-region: ap-south-1
     - name: Update codecommit repo
       run: |
         echo "new content updation" | base64 | tee -a manifest.json
