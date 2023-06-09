@@ -30,7 +30,7 @@ jobs:
         --branch-name main \
         --file-content file://manifest.json \
         --file-path manifest.json \
-        --parent-commit-id commitId \
+        --parent-commit-id ${commitId} \
         --name "Harpreet Singh" \
         --email "harrylubana14@gmail.com" \
         --commit-message "updated content" 
