@@ -20,7 +20,7 @@ jobs:
         aws-region: us-east-2
     - name: Update codecommit repo
       run: |
-        echo "new content updation" >> manifest.json
+        echo "new content updation" | base64 | tee -a manifest.json
         ls -ltr
         cat manifest.json
         aws codecommit put-file \
