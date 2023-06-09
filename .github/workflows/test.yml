@@ -24,14 +24,16 @@ jobs:
         aws-region: ap-south-1
     - name: Update codecommit repo
       run: |
+        REPO_NAME="test-repo"
+        BRANCH="main"
         echo '{ "asset_urls": ["${{ inputs.artifact_url }}"] }' | base64 | tee -a manifest.json
         ls -ltr
         cat manifest.json
         echo "getting parent commit ID: "
-        commitId=$(aws codecommit get-branch --repository-name test-repo --branch-name main | jq -r .branch.commitId)
+        commitId=$(aws codecommit get-branch --repository-name ${REPO_NAME} --branch-name ${BRANCH} | jq -r .branch.commitId)
         aws codecommit put-file \
-        --repository-name test-repo \
-        --branch-name main \
+        --repository-name ${REPO_NAME} \
+        --branch-name ${BRANCH} \
         --file-content file://manifest.json \
         --file-path manifest.json \
         --parent-commit-id ${commitId} \
