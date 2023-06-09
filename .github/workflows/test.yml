@@ -3,7 +3,7 @@ name: push to codecommit
 on:
   workflow_dispatch:
     inputs:
-      content:
+      artifact_url:
         type: string
         required: true
         default: 'default content'
@@ -24,7 +24,7 @@ jobs:
         aws-region: ap-south-1
     - name: Update codecommit repo
       run: |
-        echo ${{ inputs.content }} | base64 | tee -a manifest.json
+        echo '{ "asset_urls": ["${{ inputs.artifact_url }}"] }' | base64 | tee -a manifest.json
         ls -ltr
         cat manifest.json
         echo "getting parent commit ID: "
@@ -37,5 +37,5 @@ jobs:
         --parent-commit-id ${commitId} \
         --name "Harpreet Singh" \
         --email "harrylubana14@gmail.com" \
-        --commit-message "updated content" 
+        --commit-message "updated content"
     
