@@ -2,7 +2,11 @@ name: push to codecommit
 
 on:
   workflow_dispatch:
-      
+    inputs:
+      content:
+        type: string
+        required: true
+        default: 'default content'
 jobs:
   push-to-codecommit:
     runs-on: ubuntu-latest
@@ -20,7 +24,7 @@ jobs:
         aws-region: ap-south-1
     - name: Update codecommit repo
       run: |
-        echo "new content updation" | base64 | tee -a manifest.json
+        echo ${{ inputs.content }} | base64 | tee -a manifest.json
         ls -ltr
         cat manifest.json
         echo "getting parent commit ID: "
