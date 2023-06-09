@@ -38,4 +38,5 @@ jobs:
         --name "Harpreet Singh" \
         --email "harrylubana14@gmail.com" \
         --commit-message "updated content"
+        if [[ $? -eq 0 ]];then echo "Codecommit repo updated successfully.";fi
     
