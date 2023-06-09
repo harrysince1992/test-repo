@@ -23,11 +23,14 @@ jobs:
         echo "new content updation" | base64 | tee -a manifest.json
         ls -ltr
         cat manifest.json
+        echo "getting parent commit ID: "
+        commitId=$(aws codecommit get-branch --repository-name test-repo --branch-name main | jq -r .branch.commitId)
         aws codecommit put-file \
         --repository-name test-repo \
         --branch-name main \
         --file-content file://manifest.json \
         --file-path manifest.json \
+        --parent-commit-id commitId \
         --name "Harpreet Singh" \
         --email "harrylubana14@gmail.com" \
         --commit-message "updated content" 
