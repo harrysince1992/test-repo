@@ -1,1 +1,15 @@
-test yaml
+name: push to codecommit
+
+on:
+  workflow_dispatch:
+      
+jobs:
+  push-to-codecommit:
+    runs-on: ubuntu-latest
+    steps:
+    - name: install aws cli
+      shell: bash
+      run: |
+        sudo apt install awscli -y
+        aws --version
+    
