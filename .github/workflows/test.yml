@@ -21,6 +21,8 @@ jobs:
     - name: Update codecommit repo
       run: |
         echo "new content updation" >> manifest.json
+        ls -ltr
+        cat manifest.json
         aws codecommit put-file \
         --repository-name test-repo \
         --branch-name main \
